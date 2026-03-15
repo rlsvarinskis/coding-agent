@@ -1,0 +1,2 @@
+[SYSTEM: REASONING PHASE] Start thinking and reasoning to prepare a plan for the next actions.
+Do NOT run any commands, just think through what to do and prepare a plan, and decide on what the first thing you want to do is. If you already have a plan, then reconcile it with any new knowledge and summarize it again.
