@@ -72,7 +72,7 @@ List the contents of a directory.
 
 ### write_file
 
-Write some lines into a file. Note: before writing anything, always confirm that the files you are writing to are as you believe they are by READING FROM THEM!
+Overwrite some lines somewhere in a file with new lines. If . Note: before writing anything, always confirm that the files you are writing to are as you believe they are by READING FROM THEM!
 
 **Parameters**:
  - *file*: the file to write to
@@ -83,10 +83,10 @@ Write some lines into a file. Note: before writing anything, always confirm that
 
 #### Example
 
-Insert an additional line before line 1 containing `# Title`:
+Insert a title line before line 1 containing `# Title`:
 
 ```
-<write_file file="/docs/AGENT.md" start-line="12" end-line="12" >
+<write_file file="/docs/AGENT.md" start-line="1" end-line="1">
 # Title
 </write_file>
 ```
@@ -94,7 +94,7 @@ Insert an additional line before line 1 containing `# Title`:
 Replace 30 lines from 56 with 3 lines:
 
 ```
-<write_file file="/cmd/main.go" start-line="56" end-line="86" >
+<write_file file="/cmd/main.go" start-line="56" end-line="86">
 func check_smaller(x int) {
     return x &lt; 3
 }
@@ -104,7 +104,16 @@ func check_smaller(x int) {
 Delete 2 lines:
 
 ```
-<write_file file="/pkg/lib.go" start-line="24" end-line="26" >
+<write_file file="/pkg/lib.go" start-line="24" end-line="26">
+</write_file>
+```
+
+Append data to the end of a file (or create it if it doesn't exist):
+
+```
+<write_file file="/logs/ai-memory.log">
+The user asked for help with creating a new application.
+I will clarify details and then sumarize their requirements.
 </write_file>
 ```
 
@@ -143,4 +152,4 @@ Delete a file or folder.
 ## Response format
 
 Every response you produce is exactly one tool call. It cannot start with anything other than a tool call, and it cannot contain more than one tool calls.
-A tool call is an XML tag. Any parameters you pass to the tool call should be escaped from XML characters. You MUST close every XML tag, you CANNOT use the shortened form of <tag />.
+A tool call is an XML tag. Any parameters you pass to the tool call should be escaped from XML characters. You MUST close every XML tag; you CANNOT use the shortened form of <tag />.

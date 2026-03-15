@@ -75,7 +75,7 @@ var (
 func phaseUserInput(prompt string) *agent.Phase {
 	return &agent.Phase{
 		Id:     "user-input",
-		Type:   agent.Visible,
+		Type:   agent.UserInput,
 		Target: agent.User,
 		Prompt: prompt,
 		NextPhase: func(s string) *agent.Phase {

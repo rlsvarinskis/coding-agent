@@ -3,6 +3,7 @@ package agent
 import (
 	"context"
 	"encoding/json"
+	"strings"
 
 	"github.com/ollama/ollama/api"
 )
@@ -21,14 +22,14 @@ func NewSummarizer(ctx context.Context, client *api.Client, model string) Summar
 	}
 }
 
-func (s Summarizer) Summarize(prompt string) (string, error) {
+func (s Summarizer) Summarize(prompt, text string) (string, error) {
 	stream := false
 	chat := &api.GenerateRequest{
 		Model:   s.model,
 		Format:  json.RawMessage{},
 		Stream:  &stream,
-		System:  "Your task is to summarize the following thought process in one quick sentence that fits on one line.",
-		Prompt:  prompt,
+		System:  prompt,
+		Prompt:  text,
 		Options: map[string]any{
 			// "stop":        []string{"</"},
 			// "temperature": 0,
@@ -39,5 +40,5 @@ func (s Summarizer) Summarize(prompt string) (string, error) {
 		summary = cr.Response
 		return nil
 	})
-	return summary, err
+	return strings.Trim(summary, " \n\t"), err
 }
